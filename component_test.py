@@ -19,7 +19,7 @@ from Mask_RCNN.mrcnn import visualize
 from Mask_RCNN.mrcnn.visualize import display_instances
 
 IMAGE_DIR = '/content/drive/MyDrive//test data/122.png' # change your file path here
-MODEL_DIR = '/content/drive/MyDrive/logs/body parts20220627T2341/' # change your file path here
+MODEL_DIR = '/content/drive/MyDrive/logs/body parts20220627T2341/mask_rcnn_body parts_0050.h5' # change your file path here
 # draw an image with detected objects
 def draw_image_with_boxes(filename, boxes_list):
      # load the image
