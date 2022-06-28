@@ -35,7 +35,7 @@ class FoodConfig(Config):
     IMAGES_PER_GPU = 2
 
     # Number of classes (including background)
-    NUM_CLASSES = 1 + 5  # Background + balloon
+    NUM_CLASSES = 1 + 6  # Background + balloon
 
     # Number of training steps per epoch
     STEPS_PER_EPOCH = 100
@@ -77,6 +77,7 @@ class FoodDataset(utils.Dataset):
         self.add_class("body parts", 3, "buttocks")
         self.add_class("body parts", 4, "leg")
         self.add_class("body parts", 5, "arm ")
+        self.add_class("body parts", 6, "heel")
 
         # Train or validation dataset?
         assert subset in ["train", "val"]
@@ -114,12 +115,16 @@ class FoodDataset(utils.Dataset):
 
             polygons=[]
             objects=[]
+            print(a['regions'])
             for r in a['regions']:
+                print(r)
+                objects.append(r['region_attributes'])
                 polygons.append(r['shape_attributes'])
 
-                objects.append(r['region_attributes'])
+                
             class_ids =[]
             for n in objects:
+                #print(n)
                 if n['body parts'] == "head":
                     class_ids.append(1)
                 elif n['body parts'] == "shoulder":
@@ -130,6 +135,8 @@ class FoodDataset(utils.Dataset):
                     class_ids.append(4)
                 elif n['body parts'] == "arm":
                     class_ids.append(5)
+                elif n['body parts'] == "heel":
+                    class_ids.append(6)
                     
             #class_ids = [n['body parts'] for n in objects]
 

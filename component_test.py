@@ -1,8 +1,8 @@
 # example of inference with a pre-trained coco model
 from keras.preprocessing.image import load_img
 from keras.preprocessing.image import img_to_array
-from mrcnn.config import Config
-from mrcnn.model import MaskRCNN
+from Mask_RCNN.mrcnn.config import Config
+from Mask_RCNN.mrcnn.model import MaskRCNN
 from matplotlib import pyplot
 from matplotlib.patches import Rectangle
 import os
@@ -13,13 +13,13 @@ import numpy as np
 import skimage.io
 import matplotlib
 import matplotlib.pyplot as plt
-from mrcnn import utils
-import mrcnn.model as modellib
-from mrcnn import visualize
-from mrcnn.visualize import display_instances
+from Mask_RCNN.mrcnn import utils
+import Mask_RCNN.mrcnn.model as modellib
+from Mask_RCNN.mrcnn import visualize
+from Mask_RCNN.mrcnn.visualize import display_instances
 
-IMAGE_DIR = '/content/drive/MyDrive/dataset_body/dataset_body/val/test3.png' # change your file path here
-MODEL_DIR = '/content/drive/MyDrive/logs/mask_rcnn_body parts_0025.h5' # change your file path here
+IMAGE_DIR = '/content/drive/MyDrive//test data/122.png' # change your file path here
+MODEL_DIR = '/content/drive/MyDrive/logs/body parts20220627T2341/mask_rcnn_body parts_0050.h5' # change your file path here
 # draw an image with detected objects
 def draw_image_with_boxes(filename, boxes_list):
      # load the image
@@ -46,7 +46,7 @@ class TestConfig(Config):
      NAME = "test"
      GPU_COUNT = 1
      IMAGES_PER_GPU = 1
-     NUM_CLASSES = 1 + 5
+     NUM_CLASSES = 1 + 6
 
 # define the model
 model = MaskRCNN(mode='inference', model_dir='./', config=TestConfig())
@@ -57,7 +57,7 @@ model.load_weights(MODEL_DIR, by_name=True)
 
 
 
-class_names = ['BG','head','shoulder','buttocks','leg','arm']
+class_names = ['BG','head','shoulder','buttocks','leg','arm','heel']
 
 
 # visualize the results
